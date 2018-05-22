@@ -1,16 +1,17 @@
 package ru.geekbrains.android3_1.presenter;
 
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
-import ru.geekbrains.android3_1.R;
 import ru.geekbrains.android3_1.model.CounterModel;
 import ru.geekbrains.android3_1.view.MainView;
 
 @InjectViewState
 public class MainPresenter extends MvpPresenter<MainView>
 {
-    CounterModel model;
+    private CounterModel model;
 
     public MainPresenter(CounterModel model)
     {
@@ -23,22 +24,10 @@ public class MainPresenter extends MvpPresenter<MainView>
         super.onFirstViewAttach();
     }
 
-    public void buttonClick(int id)
+    public void buttonClick(int index)
     {
-        int value = -1;
-        switch (id){
-            case R.id.btn_one:
-                value = model.calculate(0);
-                getViewState().setButtonOneText(value + "");
-                break;
-            case R.id.btn_two:
-                value = model.calculate(1);
-                getViewState().setButtonTwoText(value + "");
-                break;
-            case R.id.btn_three:
-                value = model.calculate(2);
-                getViewState().setButtonThreeText(value + "");
-                break;
-        }
+        int value = model.calculate(index);
+        getViewState().setButtonText(index, value + "");
+        Log.d("onButtonClick", "model.calculate index=" + index + " v=" + value);
     }
 }
