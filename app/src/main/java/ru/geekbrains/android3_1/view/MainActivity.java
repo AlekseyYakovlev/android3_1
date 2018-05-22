@@ -1,7 +1,6 @@
 package ru.geekbrains.android3_1.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -15,8 +14,7 @@ import ru.geekbrains.android3_1.R;
 import ru.geekbrains.android3_1.model.CounterModel;
 import ru.geekbrains.android3_1.presenter.MainPresenter;
 
-public class MainActivity extends MvpAppCompatActivity implements MainView
-{
+public class MainActivity extends MvpAppCompatActivity implements MainView {
     @BindView(R.id.btn_one)
     Button buttonOne;
 
@@ -26,43 +24,51 @@ public class MainActivity extends MvpAppCompatActivity implements MainView
     @BindView(R.id.btn_three)
     Button buttonThree;
 
-    @InjectPresenter MainPresenter presenter;
+    @InjectPresenter
+    MainPresenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
     }
 
     @ProvidePresenter
-    public  MainPresenter provideMainPresenter()
-    {
+    public MainPresenter provideMainPresenter() {
         return new MainPresenter(new CounterModel());
     }
 
     @OnClick({R.id.btn_one, R.id.btn_two, R.id.btn_three})
-    public void onButtonClick(Button button)
-    {
-        presenter.buttonClick(button.getId());
+    public void onButtonClick(Button button) {
+        int id = -1;
+        switch (button.getId()) {
+            case R.id.btn_one:
+                id = 0;
+                break;
+            case R.id.btn_two:
+                id = 1;
+                break;
+            case R.id.btn_three:
+                id = 2;
+                break;
+        }
+
+        presenter.buttonClick(id);
     }
 
     @Override
-    public void setButtonOneText(String text)
-    {
+    public void setButtonOneText(String text) {
         buttonOne.setText(text);
     }
 
     @Override
-    public void setButtonTwoText(String text)
-    {
+    public void setButtonTwoText(String text) {
         buttonTwo.setText(text);
     }
 
     @Override
-    public void setButtonThreeText(String text)
-    {
+    public void setButtonThreeText(String text) {
         buttonThree.setText(text);
     }
 }

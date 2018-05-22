@@ -3,42 +3,37 @@ package ru.geekbrains.android3_1.presenter;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
-import ru.geekbrains.android3_1.R;
 import ru.geekbrains.android3_1.model.CounterModel;
 import ru.geekbrains.android3_1.view.MainView;
 
 @InjectViewState
-public class MainPresenter extends MvpPresenter<MainView>
-{
-    CounterModel model;
+public class MainPresenter extends MvpPresenter<MainView> {
+    private CounterModel model;
 
-    public MainPresenter(CounterModel model)
-    {
+    public MainPresenter(CounterModel model) {
         this.model = model;
     }
 
     @Override
-    protected void onFirstViewAttach()
-    { 
+    protected void onFirstViewAttach() {
         super.onFirstViewAttach();
     }
 
-    public void buttonClick(int id)
-    {
-        int value = -1;
-        switch (id){
-            case R.id.btn_one:
-                value = model.calculate(0);
-                getViewState().setButtonOneText(value + "");
-                break;
-            case R.id.btn_two:
-                value = model.calculate(1);
-                getViewState().setButtonTwoText(value + "");
-                break;
-            case R.id.btn_three:
-                value = model.calculate(2);
-                getViewState().setButtonThreeText(value + "");
-                break;
+    public void buttonClick(int id) {
+        if (id >= 0 && id <= 2) {
+            int value = model.calculate(0);
+
+            switch (id) {
+                case 0:
+                    getViewState().setButtonOneText(value + "");
+                    break;
+                case 1:
+                    getViewState().setButtonTwoText(value + "");
+                    break;
+                case 2:
+                    getViewState().setButtonThreeText(value + "");
+                    break;
+            }
         }
     }
 }
