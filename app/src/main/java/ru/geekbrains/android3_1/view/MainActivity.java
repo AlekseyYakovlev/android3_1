@@ -68,15 +68,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         switch (index) {
             case 0:
                 buttonOne.setText(text);
-                Log.d("onButtonClick", "buttonOne setText " + text);
+                Log.d("setButtonText", "buttonOne setText " + text);
                 break;
             case 1:
                 buttonTwo.setText(text);
-                Log.d("onButtonClick", "buttonTwo setText " + text);
+                Log.d("setButtonText", "buttonTwo setText " + text);
                 break;
             case 2:
                 buttonThree.setText(text);
-                Log.d("onButtonClick", "buttonThree setText " + text);
+                Log.d("setButtonText", "buttonThree setText " + text);
                 break;
         }
     }

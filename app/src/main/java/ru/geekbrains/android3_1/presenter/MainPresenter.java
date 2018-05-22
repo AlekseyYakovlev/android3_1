@@ -28,6 +28,6 @@ public class MainPresenter extends MvpPresenter<MainView>
     {
         int value = model.calculate(index);
         getViewState().setButtonText(index, value + "");
-        Log.d("onButtonClick", "model.calculate index=" + index + " v=" + value);
+        Log.d("buttonClick", "model.calculate index=" + index + " v=" + value);
     }
 }
